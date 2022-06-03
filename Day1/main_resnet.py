@@ -9,6 +9,7 @@ import torchvision.datasets as datasets
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
+from networks import ResNetBlock, ResNet
 
 if torch.cuda.is_available():
     print("The code will run on GPU.")
