@@ -11,7 +11,7 @@ import torchvision.transforms as transforms
 
 class conv_net(nn.Module):
     def __init__(self, input_ch, output_ch):
-        super(Network, self).__init__()
+        super(conv_net, self).__init__()
         self.input_ch = input_ch 
         self.output_ch = output_ch
         
