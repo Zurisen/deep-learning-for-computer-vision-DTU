@@ -75,13 +75,13 @@ def train(model, optimizer, loss_fun, name, num_epochs=30, from_checkpoint=False
               'predictions': [],
               'target': []}
   
-    for epoch in tqdm(range(num_epochs), unit='epoch'):
+    for epoch in tqdm(range(num_epochs), unit='epoch', disable=True):
         model.train()
         #For each epoch
         train_correct = 0
         train_loss = []
         model.train()
-        for minibatch_no, (data, target) in tqdm(enumerate(train_loader), total=len(train_loader)):
+        for minibatch_no, (data, target) in tqdm(enumerate(train_loader), total=len(train_loader), disable=True):
             data, target = data.to(device), target.to(device)
             #Zero the gradients computed for each weight
             optimizer.zero_grad()
@@ -136,7 +136,7 @@ def train(model, optimizer, loss_fun, name, num_epochs=30, from_checkpoint=False
 ##########################################
 
 # Select model from argv
-model_dict = {"resnet154": models.resnet152(num_classes=2, pretrained=False).to(device),
+model_dict = {"resnet152": models.resnet152(num_classes=2, pretrained=False).to(device),
     "vgg16": models.vgg16(num_classes=2, pretrained=False).to(device),
     "alexnet": models.alexnet(num_classes=2, pretrained=False).to(device),
     "basicnet_1": BasicNetwork(4).to(device),
