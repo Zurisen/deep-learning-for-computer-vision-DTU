@@ -22,7 +22,15 @@ from utils import *
 net = sys.argv[1]
 opt = sys.argv[2]
 
-## Use GPU if available 
+## create dir for checkpoints
+if not os.path.exists("checkpoints/"):
+    os.makedirs("checkpoints/")
+
+## create dir for results
+if not os.path.exists("results/"):
+    os.makedirs("results/")
+
+                    ## Use GPU if available 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Call the dataset with transformations
@@ -120,7 +128,7 @@ def train(model, optimizer, loss_fun, name, num_epochs=30, from_checkpoint=False
         info_df['test_acc'] = np.array(out_dict['test_acc']).reshape(-1)
         info_df['train_loss'] = np.array(out_dict['train_loss']).reshape(-1)
         info_df['test_loss'] = np.array(out_dict['test_loss']).reshape(-1)
-        info_df.to_csv(name+"_info.csv", index=False)
+        info_df.to_csv("results/"+name+"_info.csv", index=False)
         
         
     return out_dict
