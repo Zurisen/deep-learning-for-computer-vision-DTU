@@ -121,21 +121,14 @@ def train(model, optimizer, loss_fun, name, num_epochs=30, from_checkpoint=False
     return out_dict
 
 
-# Our networks
-basicnetwork = BasicNetwork(4).to(device)
-basicnetwork2 = BasicNetwork_2(4).to(device)
-basicnetwork3 = BasicNetwork_3(4).to(device)
-
 # Some state of the art networks
 resnet152 = models.resnet152(num_classes=2, pretrained=False).to(device)
-alexnet = models.alexnet(num_classes=2, pretrained=False).to(device)
-vgg16 = models.vgg16(num_classes=2, pretrained=False).to(device)
 
 # CrossE ntropy Loss function
 loss_fun = nn.CrossEntropyLoss()
 
 ## SGD and adam optimizers
-optimizer_SGD = optim.SGD(basicnetwork.parameters(), lr=0.01)
-optimizer_Adam = optim.Adam(basicnetwork.parameters(), lr=0.001)
+optimizer_SGD = optim.SGD(resnet152.parameters(), lr=0.01)
+optimizer_Adam = optim.Adam(resnet152.parameters(), lr=0.001)
 out_dict = train(resnet152, optimizer_Adam, loss_fun, "ResNet152_Adam", num_epochs=50)
 

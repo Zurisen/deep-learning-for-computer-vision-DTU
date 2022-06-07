@@ -123,14 +123,6 @@ def train(model, optimizer, loss_fun, name, num_epochs=30, from_checkpoint=False
 
 # Our networks
 basicnetwork = BasicNetwork(4).to(device)
-basicnetwork2 = BasicNetwork_2(4).to(device)
-basicnetwork3 = BasicNetwork_3(4).to(device)
-
-# Some state of the art networks
-resnet152 = models.resnet152(num_classes=2, pretrained=False).to(device)
-alexnet = models.alexnet(num_classes=2, pretrained=False).to(device)
-vgg16 = models.vgg16(num_classes=2, pretrained=False).to(device)
-
 # CrossE ntropy Loss function
 loss_fun = nn.CrossEntropyLoss()
 

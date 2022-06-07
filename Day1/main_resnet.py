@@ -95,4 +95,4 @@ model = ResNet(3, 8)
 model.to(device)
 #Initialize the optimizer
 optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
-out_dict = train(model, optimizer)
+out_dict = train(model, optimizer, num_epochs=30)
