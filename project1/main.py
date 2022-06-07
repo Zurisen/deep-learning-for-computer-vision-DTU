@@ -138,7 +138,7 @@ def train(model, optimizer, loss_fun, name, num_epochs=30, from_checkpoint=False
 # Select model from argv
 model_dict = {"resnet154": models.resnet152(num_classes=2, pretrained=False).to(device),
     "vgg16": models.vgg16(num_classes=2, pretrained=False).to(device),
-    "resnet154": models.alexnet(num_classes=2, pretrained=False).to(device),
+    "alexnet": models.alexnet(num_classes=2, pretrained=False).to(device),
     "basicnet_1": BasicNetwork(4).to(device),
     "basicnet_2": BasicNetwork_2(4).to(device),
     "basicnet_3": BasicNetwork_3(4).to(device)
