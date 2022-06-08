@@ -137,19 +137,20 @@ def train(model, optimizer, loss_fun, name, num_epochs=30, from_checkpoint=False
 
 # Select model from argv
 model_dict = {"resnet152": models.resnet152(num_classes=2, pretrained=False).to(device),
-    "vgg16": models.vgg16(num_classes=2, pretrained=False).to(device),
-    "alexnet": models.alexnet(num_classes=2, pretrained=False).to(device),
+    "vgg11": VGG11(num_classes=2).to(device),
+    "alexnet": AlexNet(num_classes=2).to(device),
     "basicnet_1": BasicNetwork(4).to(device),
     "basicnet_2": BasicNetwork_2(4).to(device),
     "basicnet_3": BasicNetwork_3(4).to(device)
 }
 
 
+#model = models.vgg19(num_classes=2, pretrained=False).to(device)
 model = model_dict[net]
-
 # Select optimizer from argv
-opt_dict = {"SGD": optim.SGD(model.parameters(), lr=0.01),
-    "Adam": optim.Adam(model.parameters(), lr=0.001)    
+lr = float(sys.argv[3])
+opt_dict = {"SGD": optim.SGD(model.parameters(), lr=lr),
+    "Adam": optim.Adam(model.parameters(), lr=lr)    
 }
 
 optimizer = opt_dict[opt]
@@ -157,5 +158,5 @@ optimizer = opt_dict[opt]
 # Cross Entropy Loss function
 loss_fun = nn.CrossEntropyLoss()
 
-name = net + "_" + opt
+name = net + "_" + opt + "_lr" + str(lr)
 out_dict = train(model, optimizer, loss_fun, name, num_epochs=50)

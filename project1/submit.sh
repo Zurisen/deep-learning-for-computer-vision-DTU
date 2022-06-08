@@ -12,24 +12,22 @@
 #BSUB -W 1:00
 # request 5GB of system-memory
 #BSUB -R "rusage[mem=16GB]"
-### -- set the email address --
-# please uncomment the following line and put in your e-mail address,
-# if you want to receive e-mail notifications on a non-default address
-##BSUB -u mtcarlos98@gmail.com
-### -- send notification at start --
-#BSUB -B
-### -- send notification at completion--
-#BSUB -N
 ### -- Specify the output and error file. %J is the job-id --
 ### -- -o and -e mean append, -oo and -eo mean overwrite --
-#BSUB -o gpu_%J.out
-#BSUB -e gpu_%J.err
+#BSUB -o logs/gpu_%J.out
+#BSUB -e logs/gpu_%J.err
 
-for net in resnet154, alexnet, vgg16
-do
-	for opt in SGD, Adam
-	do
-		python3 main.py $net $opt
-	done
-done
+mkdir -p logs
+pip3 install pandas --user
+pip3 install numpy --user
+pip3 install torch --user
+pip3 install matplotlib --user
+pip3 install pillow --user
+pip3 install tdqm --user
+pip3 install jupyter --user
+
+net = alexnet
+opt = SGD
+
+python3 main.py $net $opt
 
